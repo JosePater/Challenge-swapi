@@ -6,17 +6,17 @@ import { ApiService } from '../../service/api.service';
   standalone: true,
   imports: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-
 export class HomeComponent implements OnInit {
-  private _apiService = inject(ApiService); // Servicio 
+  private _apiService = inject(ApiService); // Servicio
   films: any[] = [];
+  errorMessage: string = '';
 
   ngOnInit() {
     this._apiService.getFilms().subscribe({
-      next: (data) => this.films = data.results
+      next: (data) => (this.films = data.results), // Datos obtenidos
+      error: (err) => (this.errorMessage = 'Error al obtener las películas'), // No se accede a los datos
     });
   }
-
 }
