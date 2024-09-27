@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
+import { IFilm } from '../../models/film.model';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { ApiService } from '../../service/api.service';
 })
 export class HomeComponent implements OnInit {
   private _apiService = inject(ApiService); // Servicio
-  films: any[] = [];
+  films: IFilm[] = [];
   errorMessage: string = '';
 
   ngOnInit() {
