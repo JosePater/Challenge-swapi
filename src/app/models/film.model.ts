@@ -25,6 +25,14 @@ export interface IFilmsResponse {
   results: IFilm[];
 }
 
+// Interface de la respuesta de characters
+export interface ICharactersResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: ICharacter[];
+}
+
 // Interface de los personajes
 export interface ICharacter {
   name: string;

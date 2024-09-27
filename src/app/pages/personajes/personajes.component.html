@@ -1,1 +1,19 @@
-<p>Lista de personajes</p>
+@if (personajes.length > 0) {
+    <div>
+      <h2>Lista de personajes de Star Wars:</h2>
+      <ul>
+        @for (character of personajes; track $index) {
+        <li>{{ $index + 1 }}. {{ character.name }}</li>
+        }
+      </ul>
+    </div>
+    } @if (personajes.length === 0 && !errorMessage) {
+    <div>
+      <p>Cargando personajes de Star Wars...</p>
+    </div>
+    } @if (errorMessage) {
+    <div>
+      <p>{{ errorMessage }}</p>
+    </div>
+    }
+    
