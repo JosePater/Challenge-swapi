@@ -1,0 +1,18 @@
+@if (characters.length > 0) {
+<div>
+  <h2>Lista de personajes de {{ filmTitle }}:</h2>
+  <ul>
+    @for (character of characters; track $index) {
+    <li>{{ $index + 1 }}. {{ character.name }}</li>
+    }
+  </ul>
+</div>
+} @if (characters.length === 0 && !errorMessage) {
+<div>
+  <p>Cargando personajes del episodio...</p>
+</div>
+} @if (errorMessage) {
+<div>
+  <p>{{ errorMessage }}</p>
+</div>
+}
