@@ -17,7 +17,7 @@
                 </div>
                 <div class="flex-1 min-w-0 ms-4">
                   <p class="text-sm font-medium text-gray-900 truncate">
-                    {{ character.name }}
+                    <span>{{$index + 1}}</span>. {{ character.name }}
                   </p>
                   <p class="text-sm text-gray-500 truncate">
                     Color de ojos: {{ character.eye_color }}
@@ -34,9 +34,6 @@
                     }
                   </ul>
                 </div>
-                <!-- <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                  Lista de films asociadas:
-                </div> -->
               </div>
             </li>
             }
@@ -46,6 +43,25 @@
       <!--  -->
     </ul>
   </div>
+</div>
+
+<!-- Botones de navegación -->
+<div class="fixed bottom-0 left-0 right-0 flex justify-between p-4">
+  <!-- Botón de página anterior -->
+  <button (click)="previousPage()" class="flex items-center sm:mx-10 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 10H16a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+    </svg>
+    Anterior
+  </button>
+
+  <!-- Botón de página posterior -->
+  <button (click)="nextPage()" class="flex items-center sm:mx-10 px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H4a1 1 0 110-2h10.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+    Siguiente
+  </button>
 </div>
 
 } @if (personajes.length === 0 && !errorMessage) {

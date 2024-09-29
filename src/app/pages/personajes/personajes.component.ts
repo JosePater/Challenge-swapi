@@ -34,4 +34,14 @@ export class PersonajesComponent implements OnInit {
       error: () => (this.errorMessage = 'Error al obtener los personajes'),
     });
   }
+
+  // Ir a la siguiente página de personajes
+  nextPage() {
+    console.log(`Página siguiente`);
+  }
+
+  // Ir a la anterior página de personajes
+  previousPage() {
+    console.log(`Página anterior`);
+  }
 }
