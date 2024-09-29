@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
-import { ICharacter, ICharactersResponse, IFilmsResponse } from '../models/film.model';
+import {
+  ICharacter,
+  ICharactersResponse,
+  IFilm,
+  IFilmsResponse,
+} from '../models/film.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +20,14 @@ export class ApiService {
     return this._http.get<IFilmsResponse>(this.urlBase + 'films/');
   }
 
-  // Obtener personajes del film
+  // Obtener films asociadas al personaje
+  getAssociatedFilm(filmsUrl: string[]): Observable<IFilm[]> {
+    const filmsRequiest = filmsUrl.map((url) => 
+      this._http.get<IFilm>(url));    
+    return forkJoin(filmsRequiest); // Múltiples solicitudes de films en paralelo
+  }
+
+  // Obtener personajes de la film
   getCharacters(personajesUrls: string[]): Observable<ICharacter[]> {
     const personajesRequiest = personajesUrls.map((url) =>
       this._http.get<ICharacter>(url)

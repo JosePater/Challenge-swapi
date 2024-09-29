@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
-import { ICharacter } from '../../models/film.model';
+import { ICharacter, IFilm } from '../../models/film.model';
 
 @Component({
   selector: 'app-personajes',
@@ -18,8 +18,17 @@ export class PersonajesComponent implements OnInit {
     this._apiService.getAllCharacters().subscribe({
       // Success
       next: (data) => {
-        this.personajes = data.results;
-        console.log(this.personajes.length, this.personajes);
+        const personajes = data.results;
+
+        // Para cada personaje, obtener las films asociadas
+        personajes.forEach((people: ICharacter) => {
+          this._apiService
+            .getAssociatedFilm(people.films)
+            .subscribe((assoFilm) => {
+              people.listFilms = assoFilm;
+            });
+          this.personajes = personajes; // Personajes con las películas asociadas (json)
+        });
       },
       // error
       error: () => (this.errorMessage = 'Error al obtener los personajes'),
