@@ -22,8 +22,7 @@ export class ApiService {
 
   // Obtener films asociadas al personaje
   getAssociatedFilm(filmsUrl: string[]): Observable<IFilm[]> {
-    const filmsRequiest = filmsUrl.map((url) => 
-      this._http.get<IFilm>(url));    
+    const filmsRequiest = filmsUrl.map((url) => this._http.get<IFilm>(url));
     return forkJoin(filmsRequiest); // Múltiples solicitudes de films en paralelo
   }
 
@@ -35,8 +34,10 @@ export class ApiService {
     return forkJoin(personajesRequiest); // Múltiples solicitudes de personajes en paralelo
   }
 
-  // Obtener todos los personajes de Star Wars
-  getAllCharacters(): Observable<ICharactersResponse> {
-    return this._http.get<ICharactersResponse>(this.urlBase + 'people/');
+  // Obtener los personajes de Star Wars (lista de 10)
+  getListCharacters(num: number): Observable<ICharactersResponse> {
+    return this._http.get<ICharactersResponse>(
+      this.urlBase + `people/?page=${num}`
+    );
   }
 }
