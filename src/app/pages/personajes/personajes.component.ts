@@ -1,11 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { ICharacter, ICharactersResponse } from '../../models/film.model';
+import { FormsModule } from '@angular/forms';
+import { FilterPeoplePipe } from '../../pipes/filter-people.pipe';
 
 @Component({
   selector: 'app-personajes',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, FilterPeoplePipe],
   templateUrl: './personajes.component.html',
   styleUrl: './personajes.component.css',
 })
@@ -15,6 +17,7 @@ export class PersonajesComponent implements OnInit {
   errorMessage: string = '';
   currentPage: number = 1; // Página actual: se basa en la página siguiente
   dataResp!: ICharactersResponse; // Guarda la respuesta de las páginas
+  filterPeople = ''; // Filtro de personas ngModel
 
   ngOnInit(): void {
     this.getCharacters(this.currentPage);
@@ -53,6 +56,7 @@ export class PersonajesComponent implements OnInit {
 
   // Obtener personajes
   getCharacters(numPage: number) {
+    this.filterPeople = '';
     this._apiService.getListCharacters(numPage).subscribe({
       // Success
       next: (data) => {

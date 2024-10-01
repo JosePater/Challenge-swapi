@@ -51,5 +51,5 @@ export interface ICharacter {
   created: string;
   edited: string;
   url: string;
-  listFilms?: IFilm[] | null; // De lista de urls (films: string[]) a lista de films (json)
+  listFilms: IFilm[]; // De lista de urls (films: string[]) a lista de films (json)
 }
