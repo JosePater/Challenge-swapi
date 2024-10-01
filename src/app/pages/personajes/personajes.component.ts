@@ -1,10 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
-import {
-  ICharacter,
-  ICharactersResponse,
-  IFilm,
-} from '../../models/film.model';
+import { ICharacter, ICharactersResponse } from '../../models/film.model';
 
 @Component({
   selector: 'app-personajes',
@@ -18,6 +14,7 @@ export class PersonajesComponent implements OnInit {
   personajes: ICharacter[] = [];
   errorMessage: string = '';
   currentPage: number = 1; // Página actual: se basa en la página siguiente
+  dataResp!: ICharactersResponse; // Guarda la respuesta de las páginas
 
   ngOnInit(): void {
     this.getCharacters(this.currentPage);
@@ -25,17 +22,11 @@ export class PersonajesComponent implements OnInit {
 
   // Ir a la siguiente página de personajes
   nextPage() {
-    let resp: ICharacter[] = [];
-    this._apiService.getListCharacters(this.currentPage + 1).subscribe({
-      next: (data) => {
-        resp = data.results;
-        if (resp[0].name) {
-          this.currentPage += 1;
-          this.getCharacters(this.currentPage);
-        }
-      },
-      error: () => console.log('No hay más páginas para mostrar'),
-    });
+    if (this.dataResp.next) {
+      this.getCharacters((this.currentPage += 1));
+    } else if (this.dataResp.previous) {
+      console.log(`Esta es la última página`);
+    }
   }
 
   // Ir a la anterior página de personajes
@@ -50,13 +41,13 @@ export class PersonajesComponent implements OnInit {
   // Establecer número de página
   setPageNumber(dataResponse: ICharactersResponse) {
     let num;
-    let resp;
     if (dataResponse.next) {
       const url = dataResponse.next;
       const pageNext = url!.split('=')[1]; // Obteniene el número de página de la url next
       num = parseInt(pageNext) - 1; // Le resta 1 a la página siguiente
       this.currentPage = num; // Página actual
-    } else {
+    } else if (!dataResponse.next && dataResponse.previous) {
+      console.log('última página');
     }
   }
 
@@ -65,6 +56,7 @@ export class PersonajesComponent implements OnInit {
     this._apiService.getListCharacters(numPage).subscribe({
       // Success
       next: (data) => {
+        this.dataResp = data;
         const personajes = data.results;
         // Si hay página siguiente
         if (data.next || data.previous) {

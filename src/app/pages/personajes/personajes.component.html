@@ -1,5 +1,5 @@
 @if (personajes.length > 0) {
-<div class="flex justify-center items-center min-h-screen">
+<div class="flex justify-center min-h-screen">
   <div>
     <h2 class="text-center text-2xl font-bold mb-4">
       Lista de personajes de Star Wars <span class="font-light text-xl">(Página: {{currentPage}})</span>
@@ -30,7 +30,7 @@
                   </p>
                   <ul class="text-sm text-gray-500 truncate mb-1">
                     @for (asoFilms of character.listFilms; track $index) {
-                      <li><span class="mx-2">{{$index + 1}}. </span>{{ asoFilms.title }}</li>
+                      <li><span class="mx-2">{{$index + 1}}. </span>{{ asoFilms.title }} <span class="font-light">(Episodio: {{asoFilms.episode_id}})</span> </li>
                     }
                   </ul>
                 </div>
