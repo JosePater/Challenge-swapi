@@ -1,9 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialState } from './film.state';
 import { loadFilmsFailure, loadFilmsSuccess } from './film.actions';
+import { IFilmState } from '../models/film.model';
+
+// Estado inicial
+export const initialState: IFilmState = {
+  films: [],
+  stateFilm: 'Loading',
+};
+
 
 export const filmReducer = createReducer(
-  // Estado inicial
+  // Init
   initialState,
   //   Success
   on(loadFilmsSuccess, (state, { films }) => ({
