@@ -1,10 +1,11 @@
-@if (films.length > 0) {
+@if ((filmState$ | async) === 'Loaded') {
+  <h1>Lista de películas y personajes asociados</h1>
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-wrap -m-4">
 
 
-        @for (film of films; track $index) {
+        @for (film of films$ | async; track $index) {
         <div class="mx-auto m-2 max-w-sm bg-white border border-gray-200 rounded-lg shadow">
           <a href="#">
               <img class="rounded-t-lg" src="../../assets/images/epi-{{film.episode_id}}.webp" alt="{{film.title}}" />
@@ -16,15 +17,15 @@
               <p class="mb-3 font-normal text-gray-700">Episodio: {{film.episode_id}}</p>
               <p class="mb-3 font-normal text-gray-700">Director: {{film.director}}</p>
 
-              <!-- Muestra los personajes en la tarjeta -->
-              <!-- @if (film.listCharacters) {
+              Muestra los personajes en la tarjeta
+              @if (film.listCharacters) {
                 <p class="mb-3 font-normal text-gray-700">Personajes:</p>
                 <ul>
                 @for (personajes of film.listCharacters; track $index) {
                   <li><span>- </span>{{ personajes.name }}</li>
                 }
               </ul>
-              } -->
+              } 
               <button (click)="navigation(film.episode_id)" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                   Ver personajes
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -38,12 +39,12 @@
       </div>
     </div>
   </section>
-  } @if (films.length === 0 && !errorMessage) {
+  } @if ((filmState$ | async) === 'Loading') {
   <div>
     <p>Cargando películas...</p>
   </div>
-  } @if (errorMessage) {
+  } @if ((filmState$ | async) === 'Error') {
   <div>
-    <p>{{ errorMessage }}</p>
+    <p>Error al cargar las películas</p>
   </div>
   }

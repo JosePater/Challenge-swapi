@@ -2,18 +2,10 @@
 export interface IFilm {
   title: string;
   episode_id: number;
-  opening_crawl: string;
   director: string;
-  producer: string;
   release_date: string;
-  characters: string[];  // urls de personajes
-  planets: string[];     // urls de planetas
-  starships: string[];   // urls de naves espaciales
-  vehicles: string[];    // urls de vehículos
-  species: string[];     // urls de especies
-  url: string;           // url de la película
-  created: string;
-  edited: string;
+  characters: string[]; // urls de personajes
+  url: string; // url de la película
   listCharacters?: ICharacter[] | null; // De lista de urls (characters: string[]) a lista de personajes (json)
 }
 
@@ -36,20 +28,16 @@ export interface ICharactersResponse {
 // Interface de los personajes
 export interface ICharacter {
   name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
   eye_color: string;
   birth_year: string;
   gender: string;
-  homeworld: string;   // url del planeta natal
-  films: string[];     // urls de las películas en las que aparece el personaje
-  species: string[];   // urls de especies a las que pertenece el personaje
-  vehicles: string[];  // urls de vehículos
-  starships: string[]; // urls de naves espaciales
-  created: string;
-  edited: string;
+  films: string[]; // urls de las películas en las que aparece el personaje
   url: string;
   listFilms: IFilm[]; // De lista de urls (films: string[]) a lista de films (json)
+}
+
+// Estado de film
+export interface IFilmState {
+  films: IFilm[];
+  stateFilm: 'Loading' | 'Loaded' | 'Error';
 }

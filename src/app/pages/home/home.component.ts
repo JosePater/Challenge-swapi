@@ -1,37 +1,37 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ApiService } from '../../service/api.service';
-import { IFilm } from '../../models/film.model';
+import { Store } from '@ngrx/store';
+import { IFilm, IFilmState } from '../../models/film.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import {
+  selectAllFilms,
+  selectFilmsStateLoading,
+} from '../../store/film.selectors';
+import { loadFilms } from '../../store/film.actions';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  private _apiService = inject(ApiService); // Servicio
-  private _router = inject(Router); // Ruta
-  films: IFilm[] = []; // Lista de films
-  errorMessage: string = '';
+  private _router = inject(Router);
+  films$: Observable<IFilm[]>;
+  filmState$: Observable<'Loading' | 'Loaded' | 'Error'>;
 
-  ngOnInit() {
-    this._apiService.getFilms().subscribe({
-      next: (data) => {
-        const films = data.results;
-        // Para cada película, obtener los personajes
-        films.forEach((film: IFilm) => {
-          this._apiService
-            .getCharacters(film.characters)
-            .subscribe((characters) => {
-              film.listCharacters = characters; // Reemplaza las urls con los nombres de los personajes
-            });
-        });
+  constructor(private store: Store<IFilmState>) {
+    this.films$ = this.store.select(selectAllFilms); // Lista de film
+    this.filmState$ = this.store.select(selectFilmsStateLoading); // Estado
+  }
 
-        this.films = films; // Films con los personajes (json)
-      },
-      error: () => (this.errorMessage = 'Error al obtener las películas'), // No se accede a los datos
+  ngOnInit(): void {
+    this.store.dispatch(loadFilms());
+    
+    this.filmState$.subscribe((data) => {
+      console.log('Estado: ', data);
     });
   }
 
