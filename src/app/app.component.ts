@@ -10,5 +10,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  titleNav: string[] = ['home', 'personajes'];
+  titleNav: string[] = ['home', 'personajes', 'lista-personajes'];
 }

@@ -41,3 +41,10 @@ export interface IFilmState {
   films: IFilm[];
   stateFilm: 'Loading' | 'Loaded' | 'Error';
 }
+
+// Estado de la lista de personajes
+export interface IListCharacterState {
+  characters: ICharacter[];
+  loading: boolean;
+  error: any;
+}

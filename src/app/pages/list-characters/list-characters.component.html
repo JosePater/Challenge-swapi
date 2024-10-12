@@ -1,0 +1,17 @@
+@if (errorMessage$ | async ) {
+<p>Error al cargar los personajes</p>
+
+} @else if ((loading$ | async) === false) {
+<div>
+  <h2>Lista de personajes (ngrx local store):</h2>
+  <ul>
+    @for (character of characters$ | async; track $index) {
+    <li>{{ $index + 1 }}. {{ character.name }}</li>
+    }
+  </ul>
+</div>
+} @else if ((loading$ | async)) {
+<div>
+  <p>Cargando personajes...</p>
+</div>
+}
