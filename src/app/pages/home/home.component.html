@@ -41,7 +41,7 @@
   </section>
   } @if ((filmState$ | async) === 'Loading') {
   <div>
-    <p>Cargando películas...</p>
+    <app-loading-spaceship/>
   </div>
   } @if ((filmState$ | async) === 'Error') {
   <div>

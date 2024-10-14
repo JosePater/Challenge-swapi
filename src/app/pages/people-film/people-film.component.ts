@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ICharacter } from '../../models/film.model';
 import { ApiService } from '../../service/api.service';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingSpaceshipComponent } from "../../components/loading-spaceship/loading-spaceship.component";
 
 @Component({
   selector: 'app-people-film',
   standalone: true,
-  imports: [],
+  imports: [LoadingSpaceshipComponent],
   templateUrl: './people-film.component.html',
   styleUrl: './people-film.component.css',
 })

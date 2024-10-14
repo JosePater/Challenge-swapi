@@ -48,11 +48,15 @@
                   <p class="text-sm font-medium text-gray-600">
                     Films asociadas:
                   </p>
-                  <ul class="text-sm text-gray-500 truncate mb-1">
-                    @for (asoFilms of character.listFilms; track $index) {
-                      <li><span class="mx-2">{{$index + 1}}. </span>{{ asoFilms.title }} <span class="font-light">(Episodio: {{asoFilms.episode_id}})</span> </li>
-                    }
-                  </ul>
+                  @if (character.listFilms) {
+                    <ul class="text-sm text-gray-500 truncate mb-1">
+                      @for (asoFilms of character.listFilms; track $index) {
+                        <li><span class="mx-2">{{$index + 1}}. </span>{{ asoFilms.title }} <span class="font-light">(Episodio: {{asoFilms.episode_id}})</span> </li>
+                      }
+                    </ul>
+                  } @else {
+                    <app-loading-spinner />
+                  }
                 </div>
               </div>
             </li>
@@ -86,7 +90,7 @@
 
 } @if (personajes.length === 0 && !errorMessage) {
 <div>
-  <p>Cargando personajes de Star Wars...</p>
+  <app-loading-spaceship/>
 </div>
 } @if (errorMessage) {
 <div>

@@ -3,11 +3,13 @@ import { ApiService } from '../../service/api.service';
 import { ICharacter, ICharactersResponse } from '../../models/film.model';
 import { FormsModule } from '@angular/forms';
 import { FilterPeoplePipe } from '../../pipes/filter-people.pipe';
+import { LoadingSpaceshipComponent } from "../../components/loading-spaceship/loading-spaceship.component";
+import { LoadingSpinnerComponent } from "../../components/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-personajes',
   standalone: true,
-  imports: [FormsModule, FilterPeoplePipe],
+  imports: [FormsModule, FilterPeoplePipe, LoadingSpaceshipComponent, LoadingSpinnerComponent],
   templateUrl: './personajes.component.html',
   styleUrl: './personajes.component.css',
 })

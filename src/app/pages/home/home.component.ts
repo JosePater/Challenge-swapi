@@ -9,11 +9,13 @@ import {
   selectFilmsStateLoading,
 } from '../../store/film.selectors';
 import { loadFilms } from '../../store/film.actions';
+import { LoadingSpaceshipComponent } from '../../components/loading-spaceship/loading-spaceship.component';
+import { LoadingSpinnerComponent } from "../../components/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, LoadingSpaceshipComponent, LoadingSpinnerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
