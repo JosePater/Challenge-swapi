@@ -1,27 +1,122 @@
-# ChallengeSwapi
+# Frontend Challenge Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+<p>
+    <img src="https://img.shields.io/badge/STATUS-TERMINADO-green">
+    <img src="https://img.shields.io/badge/Angular-17.2.3-red">
+    <img src="https://img.shields.io/badge/TailwindCSS-blue">
+    <img src="https://img.shields.io/badge/Git/GitHub-black">
+</p>
 
-## Development server
+## API Star Wars
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Descripción
 
-## Code scaffolding
+Este proyecto implementa una aplicación web basada en las películas de Star Wars, utilizando Angular. La aplicación consume datos de la API SWAPI, que proporciona información completa sobre los 6 Films de Star Wars.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Funcionalidades
 
-## Build
+### Fuente de Datos
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- La aplicación utiliza la API de SWAPI: https://swapi.dev/
 
-## Running unit tests
+### Lista de Films
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+La aplicación muestra cada film con la siguiente información:
 
-## Running end-to-end tests
+1. Nombre
+2. Número de episodio
+3. Director
+4. Un enlace que dirige a la página de personajes asociados al film
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Página de Personajes
 
-## Further help
+La aplicación limita la visualización a 10 personajes por página. La página cuenta con dos botones para ir a la página siguiente y anterior. <br />
+Cada personaje en la lista muestra:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Nombre
+2. Color de ojos
+3. Género
+4. Lista de films asociados (nombres)
+
+### Filtros
+
+La página de personajes incluye los siguientes filtros de búsqueda:
+
+1. Nombre
+2. Color de ojos
+3. Género
+4. Film asociada
+
+### Estructura
+
+```javascript
+src/APP
+│   app.component.css
+│   app.component.html
+│   app.component.ts
+│   app.config.ts
+│   app.routes.ts
+│
+├───assets
+│   └───images
+├───components
+│   ├───loading-spaceship
+│   │       loading-spaceship.component.ts
+│   │
+│   └───loading-spinner
+│           loading-spinner.component.ts
+│
+├───models
+│       film.model.ts
+│
+├───pages
+│   ├───home
+│   │       home.component.css
+│   │       home.component.html
+│   │       home.component.ts
+│   │
+│   ├───people-film
+│   │       people-film.component.css
+│   │       people-film.component.html
+│   │       people-film.component.ts
+│   │
+│   └───personajes
+│           personajes.component.css
+│           personajes.component.html
+│           personajes.component.ts
+│
+├───pipes
+│       filter-people.pipe.ts
+│
+├───service
+│       api.service.ts
+│
+├───services
+│       films.service.ts
+│
+└───store
+        film.actions.ts
+        film.effects.ts
+        film.reducer.ts
+        film.selectors.
+```
+
+## Tecnologías
+
+- **Framework de Frontend:** Angular 17.2.3
+- **Framework de CSS:** TailwindCSS
+- **Control de versiones:** Git / GitHuub
+
+```bash
+npm install          # Instala las dependencias del proyecto.
+ng serve             # Inicia el servidor de desarrollo (http://localhost:4200/).
+ng build             # Compila la aplicación para producción.
+
+```
+
+## Desarrollador:
+
+| [<img src="https://avatars.githubusercontent.com/u/120583187?v=4" width=115><br><sub>José Luis Paternina Martínez</sub>](https://github.com/JosePater)
+|:------------------------------------------------------------------------------------------------------------------------------------------------------:|
+
+© Derechos Reservados
