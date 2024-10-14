@@ -28,7 +28,7 @@ export class PersonajesComponent implements OnInit {
     if (this.dataResp.next) {
       this.getCharacters((this.currentPage += 1));
     } else if (this.dataResp.previous) {
-      console.log(`Esta es la última página`);
+      alert(`Esta es la última página`);
     }
   }
 
@@ -37,7 +37,7 @@ export class PersonajesComponent implements OnInit {
     if (this.currentPage > 1) {
       this.getCharacters(this.currentPage - 1);
     } else {
-      console.log('Esta es la primera página');
+      alert('Esta es la primera página');
     }
   }
 
@@ -75,7 +75,7 @@ export class PersonajesComponent implements OnInit {
             this.personajes = personajes; // Personajes con las películas asociadas (json)
           });
         } else {
-          console.log('No hay más página para mostrar');
+          alert('No hay más página para mostrar');
         }
       },
       // error

@@ -1,7 +1,7 @@
 @if (characters.length > 0) {
 <div>
-  <h2>Lista de personajes de {{ filmTitle }}:</h2>
-  <ul>
+  <h2 class="m-2 font-semibold">Lista de personajes de {{ filmTitle }}:</h2>
+  <ul  class="m-2">
     @for (character of characters; track $index) {
     <li>{{ $index + 1 }}. {{ character.name }}</li>
     }
